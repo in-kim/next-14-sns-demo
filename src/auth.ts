@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from "next-auth/providers/credentials"
-import {NextResponse} from "next/server";
 
 export const {
   handlers: { GET, POST },
@@ -9,15 +8,6 @@ export const {
   pages:{
     signIn: '/i/flow/login',
     newUser: '/i/flow/signup',
-  },
-  callbacks: {
-    async authorized({ request, auth }) {
-      if (!auth) {
-        console.log("??")
-        // return NextResponse.redirect(`http://localhost:3000/i/flow/login`)
-      }
-      return true;
-    }
   },
   providers: [
     CredentialsProvider({

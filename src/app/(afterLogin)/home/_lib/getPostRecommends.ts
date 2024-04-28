@@ -1,13 +1,18 @@
-export async function getPostRecommends() {
-  const res = await fetch('http://localhost:9090/api/postRecommends', {
+
+type Props = {
+  pageParam?: number
+}
+
+export async function getPostRecommends({pageParam}: Props) {
+  const res = await fetch(`http://localhost:9090/api/postRecommends?cursor=${pageParam}`, {
     next: {
       // 캐싱 (서버에 요청을 보내지 않고 캐싱된 데이터를 사용)
       // 캐싱된 데이터를 없애고 새로운 데이터를 업데이트 하기위해 이 tag를 사용
       tags: ['posts', 'recommends'],
     },
-    // 캐싱 저장을 하지 않겠다.
-    cache: 'no-store',
   });
+  console.log('pageParam', pageParam);
+  
   // The return value is not serialized
   // you can return Date, Map, Set, etc.
 
