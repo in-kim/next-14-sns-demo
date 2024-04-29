@@ -11,8 +11,6 @@ export async function getPostRecommends({pageParam}: Props) {
       tags: ['posts', 'recommends'],
     },
   });
-  console.log('pageParam', pageParam);
-  
   // The return value is not serialized
   // you can return Date, Map, Set, etc.
 

@@ -1,6 +1,6 @@
 "use client";
 
-import {InfiniteData, useInfiniteQuery, useQuery} from "@tanstack/react-query";
+import {InfiniteData, useInfiniteQuery, useQuery, useSuspenseInfiniteQuery} from "@tanstack/react-query";
 import Post from "@/app/(afterLogin)/_component/Post";
 import {Post as IPost} from "@/model/Post";
 import {getFollowingPosts} from "@/app/(afterLogin)/home/_lib/getFollowingPosts";
@@ -13,7 +13,7 @@ export default function FollowingPosts() {
     fetchNextPage,
     hasNextPage,
     isFetching,
-  } = useInfiniteQuery<IPost[], Object, InfiniteData<IPost[]>, [_1: string, _1: string], number>({
+  } = useSuspenseInfiniteQuery<IPost[], Object, InfiniteData<IPost[]>, [_1: string, _1: string], number>({
     queryKey: ['posts', 'followings'],
     queryFn: ({pageParam}) => getFollowingPosts({pageParam}),
     initialPageParam: 0,

@@ -4,6 +4,8 @@ import TabProvider from "@/app/(afterLogin)/home/_component/TabProvider";
 import PostForm from "@/app/(afterLogin)/home/_component/PostForm";
 import {dehydrate, HydrationBoundary, QueryClient} from "@tanstack/react-query";
 import TabDecider from "@/app/(afterLogin)/home/_component/TabDecider";
+import { Suspense } from 'react';
+import Loading from '@/app/_component/Loading';
 
 export default async function Home() {
   const queryClient = new QueryClient();
@@ -17,7 +19,9 @@ export default async function Home() {
         <TabProvider>
           <Tab/>
           <PostForm />
-          <TabDecider />
+          <Suspense fallback={<Loading />}>
+            <TabDecider />
+          </Suspense>
         </TabProvider>
       </HydrationBoundary>
     </main>

@@ -1,7 +1,7 @@
 "use client";
 
 import {Fragment, useEffect} from "react";
-import {InfiniteData, useInfiniteQuery} from "@tanstack/react-query";
+import {InfiniteData, useInfiniteQuery, useSuspenseInfiniteQuery} from "@tanstack/react-query";
 import {getPostRecommends} from "@/app/(afterLogin)/home/_lib/getPostRecommends";
 import Post from "@/app/(afterLogin)/_component/Post";
 import {Post as IPost} from "@/model/Post";
@@ -13,7 +13,7 @@ export default function PostRecommends() {
     fetchNextPage, 
     hasNextPage, 
     isFetching 
-  } = useInfiniteQuery<IPost[], Object, InfiniteData<IPost[]>, [_1: string, _2: string], number>({
+  } = useSuspenseInfiniteQuery<IPost[], Object, InfiniteData<IPost[]>, [_1: string, _2: string], number>({
     queryKey: ['posts', 'recommends'],
     queryFn: ({pageParam}) => getPostRecommends({pageParam}),
     initialPageParam: 0,
